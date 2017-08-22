@@ -1,0 +1,44 @@
+package ExcelOperations;
+
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+public class ExcelOperations {
+
+	public static XSSFWorkbook workbook;
+	public static XSSFSheet	sheet;
+	
+	public static void openExcelRead(String filePath) throws InvalidFormatException, IOException{
+		 workbook = new XSSFWorkbook(new File(filePath));
+	}
+	
+	public static void write()
+	{
+		
+	}
+	
+	public static String read(int rowNum, int colNum )
+	{
+		Row row = sheet.getRow(rowNum);
+		Cell cell = row.getCell(colNum);
+		return cell.getStringCellValue() ;
+	}
+	
+	public static void loadSheet(int sheetNum)
+	{
+		sheet = workbook.getSheetAt(sheetNum);
+	}
+	
+	public static void main(String args[]) throws InvalidFormatException, IOException{
+		openExcelRead("C:/Users/Hvuser/Downloads/test.xlsx");
+		loadSheet(0);
+		System.out.println(read(0,0));
+	}
+	
+}
